@@ -7,22 +7,34 @@ const NavBar = () => {
     return (
         <Consumer>
             { ({ actions }) => {
-                <nav class="main-nav">
-                    <ul>
-                        <li>
-                            <NavLink to='/cats' 
-                                     onClick={() => actions.searchPhotos('cats')}>
-                                         Cats
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/dogs'>Dogs</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to='/computers'>Computers</NavLink>
-                        </li>
-                    </ul>
-                </nav>
+                const quickSearch = (search) => {
+                    actions.searchPhotos(search);
+                };
+
+                return (
+                    <nav className="main-nav">
+                        <ul>
+                            <li>
+                                <NavLink to='/search/cats' 
+                                         onClick={() => quickSearch('cats')}>
+                                            Cats
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/search/dogs'
+                                         onClick={() => quickSearch('dogs')}>
+                                             Dogs
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to='/search/computers'
+                                         onClick={() => quickSearch('computers')}>
+                                             Computers
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </nav>
+                );
             }}
         </Consumer>
 

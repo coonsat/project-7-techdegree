@@ -25,8 +25,9 @@ export class Provider extends Component {
         axios.get(`https://api.flickr.com/services/rest?method=flickr.photos.search&${query}`)
           .then(response => {
             this.setState({
-              photos: response.data.photos.photo,
-              loading: false
+                searchText: search,
+                photos: response.data.photos.photo,
+                loading: false
             });
           })
           .catch(error => {
@@ -45,6 +46,7 @@ export class Provider extends Component {
             <GalleryContext.Provider value={{
                 photos: this.state.photos,
                 loading: this.state.loading,
+                searchText: this.state.searchText,
                 actions: {
                     searchPhotos: this.searchPhotos,
                     updateSearch: this.updateSearch

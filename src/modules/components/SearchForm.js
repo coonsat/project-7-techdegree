@@ -1,15 +1,19 @@
 import React from 'react';
 import { Consumer } from '../contexts';
+import { useHistory } from 'react-router';
 
 const SearchForm = () => {
 
     const userInput = React.createRef();
+    let history = useHistory();
 
     return (
         <Consumer>
             { ({ actions }) => {
             const handleClick = e => {
                 e.preventDefault();
+                const path = `/search/${userInput.current.value}`;
+                history.push(path);
                 actions.searchPhotos(userInput.current.value);
                 e.currentTarget.reset();
             }
