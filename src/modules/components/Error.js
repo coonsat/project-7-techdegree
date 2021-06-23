@@ -1,5 +1,6 @@
 import React from 'react';
 
+//Render error component if no valid routes are found
 const Error = () => {
     return (
         <div>

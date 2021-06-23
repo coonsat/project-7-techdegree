@@ -10,16 +10,18 @@ const GalleryContext = React.createContext();
 export class Provider extends Component {
 
     state = {
-        searchText: [],
+        searchText: '',
         loading: true,
         photos: [],
         default: ['cats', 'dogs', 'computers']
     }
 
+    //randomise the selection of default search categories.
     randomSearch = () => {
         return this.state.default[Math.floor(Math.random() * this.state.default.length)];
     };
 
+    //default search in case the route has no search parameters present
     searchPhotos = ( search = this.randomSearch() ) => {
         const query = `api_key=${flickrDeets.key}&tags=${search}&per_page=20&format=json&nojsoncallback=1`;
         axios.get(`https://api.flickr.com/services/rest?method=flickr.photos.search&${query}`)
@@ -35,12 +37,7 @@ export class Provider extends Component {
           });
     };
 
-    updateSearch = (searchText) => {
-        this.setState({
-            searchText
-        });
-    };
-
+    // Export items to components
     render() {
         return(
             <GalleryContext.Provider value={{
@@ -48,9 +45,7 @@ export class Provider extends Component {
                 loading: this.state.loading,
                 searchText: this.state.searchText,
                 actions: {
-                    searchPhotos: this.searchPhotos,
-                    updateSearch: this.updateSearch
-                }
+                    searchPhotos: this.searchPhotos                }
             }}>
                 {this.props.children}
             </GalleryContext.Provider>

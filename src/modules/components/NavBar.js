@@ -6,6 +6,10 @@ import { Consumer } from '../contexts';
 const NavBar = () => {
     return (
         <Consumer>
+            {/* 
+                Quick search provides access to consumer action searchPhotos
+                On click of each button changes the route to a search parameter 
+            */}
             { ({ actions }) => {
                 const quickSearch = (search) => {
                     actions.searchPhotos(search);

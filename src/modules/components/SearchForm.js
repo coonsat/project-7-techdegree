@@ -4,7 +4,10 @@ import { useHistory } from 'react-router';
 
 const SearchForm = () => {
 
+    //create reference to retrieve user input
     const userInput = React.createRef();
+
+    //use history hook to access history path
     let history = useHistory();
 
     return (
@@ -12,8 +15,13 @@ const SearchForm = () => {
             { ({ actions }) => {
             const handleClick = e => {
                 e.preventDefault();
+
+                //change the path of the route to inclulde the search parameter
+                //push this onto the history stack
                 const path = `/search/${userInput.current.value}`;
                 history.push(path);
+                
+                //change the search text in the context state and reset the input
                 actions.searchPhotos(userInput.current.value);
                 e.currentTarget.reset();
             }
