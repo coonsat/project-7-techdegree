@@ -24,14 +24,16 @@ const Gallery = ({ location }) => {
 
                 //Find the path given in the route by accesstion the location object
                 const path = location.pathname.substring( location.pathname.lastIndexOf("/") + 1 );
-
+                let pageLoading = loading;
                 //If both path AND search text are empty then trigger a random search
                 if ( path === '' && searchText === '' ) {
+                    pageLoading = true;
                     actions.searchPhotos();
                 }
 
                 //If path is different to search text then force a search based on the new location
                 if (path !== searchText) {
+                    pageLoading = true;
                     actions.searchPhotos(path)
                 }
 
@@ -44,7 +46,7 @@ const Gallery = ({ location }) => {
                     // If not then display no items found 
                     <div className="photo-container">
                         <ul>
-                            {loading 
+                            {pageLoading 
                                 ? <h3>Loading...</h3> 
                                 : gallery.length > 0 
                                 ? gallery 
